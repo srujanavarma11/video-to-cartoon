@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h1>Recents</h1>
+<div class="video-container">
+    <h2>Your Cartoon Videos</h2>
+    {% if folder != '' %}
+    <video controls width="100%" >
+        <source src="{{ url_for('base.serve_storage_file', folder=folder, filename=filename) }}" type="video/mp4">
+
+    </video>
+    
+    <div class="download-link">
+        <a href="{{ url_for('base.serve_storage_file', folder=folder, filename=filename) }}">Download the video</a>
+    </div>
+    {% else %}
+    <p>select a video to preview.</p>
+    {% endif %}
+</div><hr>
+<h2>Select file from list to preview the cartoon: </h2>
+<div class="lists">
+    {% for dir in directories %}
+        <a href="{{ url_for('base.recent_conversions', folder=dir, filename=dir+'.mp4')}}">{{dir}}</a>
+    {% endfor %}
+</div>
+{% endblock%}

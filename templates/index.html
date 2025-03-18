@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live to Cartoon</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form {
+            margin-bottom: 20px;
+        }
+        .video-container {
+            margin-top: 30px;
+        }
+        video {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .download-link {
+            display: inline-block;
+            margin-top: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* This styling is for the recents.html */
+        .lists{
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        .lists a{
+            text-decoration: none;
+            text-transform: capitalize;
+            border: 1px solid black;
+            padding: 8px 5px;
+            margin-bottom: 10px;
+        }
+
+        .lists a:hover{
+            font-size: medium;
+            padding: 10px 6px;
+        }
+
+        /* This styling is for the navigation */
+        nav{
+            display: flex;
+            flex-direction: row;
+        }
+        nav a{
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 25px;
+        }
+        
+        nav a:hover{
+            font-size: 30px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    {% include 'toast.html' %}
+    {% include 'navigation.html' %}
+    <div class="root">
+        {% block content %}
+        <h1>Live to Cartoon</h1>
+        
+        <div class="form">
+            <form method="post" enctype="multipart/form-data">
+                <label for="filename">Filename: </label>
+                <input type="text" name="filename" id="filename">
+                <input type="file" name="file" id="file">
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+
+        <div class="video-container">
+            <h2>Your Cartoon Video</h2>
+            {% if folder != '' %}
+            <video controls width="100%" >
+                <source src="{{ url_for('base.serve_storage_file', folder=folder, filename=filename) }}" type="video/mp4">
+
+            </video>
+            
+            <div class="download-link">
+                <a href="{{ url_for('base.serve_storage_file', folder=folder, filename=filename) }}">Download the video</a>
+            </div>
+            {% else %}
+            <p>Upload an video to preview.</p>
+            {% endif %}
+        </div>
+        {% endblock %}
+    </div>
+</body>
+</html>
