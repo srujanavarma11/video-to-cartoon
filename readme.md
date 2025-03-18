@@ -1,6 +1,6 @@
 # Convert video to cartoon 
 Clone the application: <br>
-<code>git clone https://github.com/srujanavarma11/video-to-cartoon/</code>
+<code>git clone [https://github.com/srujanavarma11/video-to-cartoon/](https://github.com/srujanavarma11/video-to-cartoon)</code>
 
 # create envirnoment file
 <code>python -m venv venv</code> 
